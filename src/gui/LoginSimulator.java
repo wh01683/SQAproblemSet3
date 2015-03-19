@@ -19,8 +19,7 @@ import java.util.Random;
  */
 
 
-
-public class BankLogin {
+public class LoginSimulator {
 
 
     PasswordChecker passwordChecker = new PasswordChecker();
@@ -38,7 +37,7 @@ public class BankLogin {
     private EmailValidator emailValidator = new EmailValidator();
     private Random r = new Random();
 
-    public BankLogin() {
+    public LoginSimulator() {
 
         ListenForButton listenForButton = new ListenForButton();
         this.loginButton.addActionListener(listenForButton);
@@ -53,14 +52,13 @@ public class BankLogin {
 
 
         JFrame frame = new JFrame("bank_gui");
-        frame.setContentPane(new BankLogin().panel1);
+        frame.setContentPane(new LoginSimulator().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 
 
-
-        BankLogin bankLogin =  new BankLogin();
+        LoginSimulator bankLogin = new LoginSimulator();
 
     }
 
