@@ -32,62 +32,105 @@ PasswordChecker(){
     *
     * */
 
-public boolean checkPasswordWithASCIIValues(String stringPassword){
+public boolean checkPasswordWithASCIIValues(char[] userPassword) {
 
-    boolean accepted = false;
     int numberOfSpecialCharacters = 0;
     int numberOfLowerCaseLetters = 0;
     int numberOfUpperCaseLetters = 0;
     int numberOfNumbers = 0;
 
-    char[] userPassword = stringPassword.toCharArray();
 
-
-    if(userPassword.length>16 | userPassword.length<8){
+    if (userPassword.length > 16 | userPassword.length < 8) {
+        //System.out.println("Must be no longer than 16 and no shorter than 8 chars long.");
         return false;
-    }
-    else{
-        for(char c : userPassword){
-            if((int)c>126 | (int)c<33){
+    } else {
+        for (char c : userPassword) {
+            if ((int) c > 126 | (int) c < 33) {
+                //System.out.println("Outside allowed ASCII ranges.");
                 return false;
-            }
-            else if((int)c>47 && (int)c<58){
+            } else if ((int) c > 47 && (int) c < 58) {
                 numberOfNumbers++;
-            }
-            else if((int)c>96 && (int)c<123){
+            } else if ((int) c > 96 && (int) c < 123) {
                 numberOfLowerCaseLetters++;
-            }
-            else if((int)c>64 && (int)c<91){
+            } else if ((int) c > 64 && (int) c < 91) {
                 numberOfUpperCaseLetters++;
-            }
-            else if(((int)c>32 && (int)c<48) | ((int)c>57 && (int)c<65) | ((int)c>90 && (int)c<97) | ((int)c>122 && (int)c<127)){
+            } else if (((int) c > 32 && (int) c < 48) | ((int) c > 57 && (int) c < 65) | ((int) c > 90 && (int) c < 97) | ((int) c > 122 && (int) c < 127)) {
                 numberOfSpecialCharacters++;
             }
         }
 
-        if(numberOfLowerCaseLetters>0 && numberOfNumbers>0 && numberOfSpecialCharacters>0 && numberOfUpperCaseLetters>0){
+        if (numberOfLowerCaseLetters > 0 && numberOfNumbers > 0 && numberOfSpecialCharacters > 0 && numberOfUpperCaseLetters > 0) {
             return true;
+        } else {
+
+            //System.out.println("Did not have 1 of each: lower case, uppercase, special, number.");
+            return false;
         }
     }
-    return accepted;
+}
+
+    public boolean checkStringPassWithASCIIValues(String stringPassword){
+
+        int numberOfSpecialCharacters = 0;
+        int numberOfLowerCaseLetters = 0;
+        int numberOfUpperCaseLetters = 0;
+        int numberOfNumbers = 0;
+
+        char[] userPassword = stringPassword.toCharArray();
+
+
+        if(userPassword.length>16 | userPassword.length<8){
+            //System.out.println("Must be no longer than 16 and no shorter than 8 chars long.");
+            return false;
+        }
+        else{
+            for(char c : userPassword){
+                if((int)c>126 | (int)c<33){
+                    //System.out.println("Outside allowed ASCII ranges.");
+                    return false;
+                }
+                else if((int)c>47 && (int)c<58){
+                    numberOfNumbers++;
+                }
+                else if((int)c>96 && (int)c<123){
+                    numberOfLowerCaseLetters++;
+                }
+                else if((int)c>64 && (int)c<91){
+                    numberOfUpperCaseLetters++;
+                }
+                else if(((int)c>32 && (int)c<48) | ((int)c>57 && (int)c<65) | ((int)c>90 && (int)c<97) | ((int)c>122 && (int)c<127)){
+                    numberOfSpecialCharacters++;
+                }
+            }
+
+            if(numberOfLowerCaseLetters>0 && numberOfNumbers>0 && numberOfSpecialCharacters>0 && numberOfUpperCaseLetters>0){
+                return true;
+            }
+            else{
+
+                //System.out.println("Did not have 1 of each: lower case, uppercase, special, number.");
+                return false;
+            }
+        }
+
 }
 
 
 
-/*another idea: store the password in a hashtable where each character is placed once. check each one*/
- public boolean checkPassword(String userPassword){
- Hashtable<Integer, Character> currentPasswordHashtable = new Hashtable<Integer, Character>(userPassword.length());
-
-    boolean accepted = false;
-
-     for(char c : userPassword.toCharArray()){
-        currentPasswordHashtable.put((int)c, c);
-    }
 
 
 
 
-    return accepted;
-}
+
+
+
+
+
+
+
+
+
+
+
 
 }
