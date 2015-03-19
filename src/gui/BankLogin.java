@@ -5,8 +5,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Robert Howerton
@@ -25,8 +23,7 @@ import java.util.regex.Pattern;
 public class BankLogin {
 
 
-    private Pattern pattern;
-    private Matcher matcher;
+    PasswordChecker passwordChecker = new PasswordChecker();
 
     private JPanel panel1;
     private JTextField usernameField;
@@ -34,16 +31,20 @@ public class BankLogin {
     private JButton loginButton;
     private JTextField testField;
     private JButton randomPasswordButton;
+    private JButton verifyPasswordButton;
+    private JButton verifyEMailButton;
+    private JLabel resultsDisplayLabel;
     private JTextField testTextField;
     private EmailValidator emailValidator = new EmailValidator();
     private Random r = new Random();
-    PasswordChecker passwordChecker = new PasswordChecker();
 
     public BankLogin() {
 
         ListenForButton listenForButton = new ListenForButton();
         this.loginButton.addActionListener(listenForButton);
         this.randomPasswordButton.addActionListener(listenForButton);
+        this.verifyEMailButton.addActionListener(listenForButton);
+        this.verifyPasswordButton.addActionListener(listenForButton);
 
 
     }
@@ -113,8 +114,17 @@ public class BankLogin {
 
     public void checkPassword(){
 
-        System.out.println(passwordChecker.checkPasswordWithASCIIValues(passwordField.getPassword()));
+        this.resultsDisplayLabel.setText("Password Valid: " + passwordChecker.checkPasswordWithASCIIValues(passwordField.getPassword()));
 
+    }
+
+    public void verifyEmail() {
+        this.resultsDisplayLabel.setText("Email valid: " + emailValidator.validate(usernameField.getText()));
+    }
+
+    public void loginCheck() {
+        this.resultsDisplayLabel.setText("Both valid: " + (emailValidator.validate(usernameField.getText()) &&
+                passwordChecker.checkPasswordWithASCIIValues(passwordField.getPassword())));
     }
 
 
@@ -122,11 +132,14 @@ public class BankLogin {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            if(actionEvent.getSource() == loginButton){
+            if (actionEvent.getSource() == verifyPasswordButton) {
                 checkPassword();
-            }
-            if(actionEvent.getSource() == randomPasswordButton){
+            } else if (actionEvent.getSource() == loginButton) {
+                loginCheck();
+            } else if (actionEvent.getSource() == randomPasswordButton) {
                 checkRandomPassword();
+            } else if (actionEvent.getSource() == verifyEMailButton) {
+                verifyEmail();
             }
         }
     }

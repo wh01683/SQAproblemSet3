@@ -1,6 +1,4 @@
 package gui;
-import java.lang.Character;
-import java.util.Hashtable;
 
 /**
  * Created by robert on 3/18/2015.
@@ -32,7 +30,7 @@ PasswordChecker(){
     *
     * */
 
-public boolean checkPasswordWithASCIIValues(char[] userPassword) {
+    public boolean checkPasswordWithASCIIValues(final char[] userPassword) {
 
     int numberOfSpecialCharacters = 0;
     int numberOfLowerCaseLetters = 0;
@@ -59,17 +57,12 @@ public boolean checkPasswordWithASCIIValues(char[] userPassword) {
             }
         }
 
-        if (numberOfLowerCaseLetters > 0 && numberOfNumbers > 0 && numberOfSpecialCharacters > 0 && numberOfUpperCaseLetters > 0) {
-            return true;
-        } else {
-
-            //System.out.println("Did not have 1 of each: lower case, uppercase, special, number.");
-            return false;
-        }
+        //System.out.println("Did not have 1 of each: lower case, uppercase, special, number.");
+        return numberOfLowerCaseLetters > 0 && numberOfNumbers > 0 && numberOfSpecialCharacters > 0 && numberOfUpperCaseLetters > 0;
     }
 }
 
-    public boolean checkStringPassWithASCIIValues(String stringPassword){
+    public boolean checkStringPassWithASCIIValues(final String stringPassword) {
 
         int numberOfSpecialCharacters = 0;
         int numberOfLowerCaseLetters = 0;
@@ -103,14 +96,8 @@ public boolean checkPasswordWithASCIIValues(char[] userPassword) {
                 }
             }
 
-            if(numberOfLowerCaseLetters>0 && numberOfNumbers>0 && numberOfSpecialCharacters>0 && numberOfUpperCaseLetters>0){
-                return true;
-            }
-            else{
-
-                //System.out.println("Did not have 1 of each: lower case, uppercase, special, number.");
-                return false;
-            }
+            //System.out.println("Did not have 1 of each: lower case, uppercase, special, number.");
+            return numberOfLowerCaseLetters > 0 && numberOfNumbers > 0 && numberOfSpecialCharacters > 0 && numberOfUpperCaseLetters > 0;
         }
 
 }
