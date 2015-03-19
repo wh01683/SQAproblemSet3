@@ -32,13 +32,16 @@ PasswordChecker(){
     *
     * */
 
-public boolean checkPasswordWithASCIIValues(char[] userPassword){
+public boolean checkPasswordWithASCIIValues(String stringPassword){
 
     boolean accepted = false;
     int numberOfSpecialCharacters = 0;
     int numberOfLowerCaseLetters = 0;
     int numberOfUpperCaseLetters = 0;
     int numberOfNumbers = 0;
+
+    char[] userPassword = stringPassword.toCharArray();
+
 
     if(userPassword.length>16 | userPassword.length<8){
         return false;
@@ -78,7 +81,7 @@ public boolean checkPasswordWithASCIIValues(char[] userPassword){
     boolean accepted = false;
 
      for(char c : userPassword.toCharArray()){
-        currentPasswordHashtable.putIfAbsent((int)c, c);
+        currentPasswordHashtable.put((int)c, c);
     }
 
 
